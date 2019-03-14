@@ -75,11 +75,15 @@ class Email
             $html = $this->getTemplate($this->props['template'], 'html');
             $text = $this->getTemplate($this->props['template'], 'text');
 
-            if ($html->exists() && $text->exists()) {
+            if ($html->exists()) {
                 $this->props['body'] = [
-                    'html' => $html->render($data),
-                    'text' => $text->render($data),
+                    'html' => $html->render($data)
                 ];
+
+                if ($text->exists()) {
+                    $this->props['body']['text'] = $text->render($data);
+                }
+
             // fallback to single email text template
             } elseif ($text->exists()) {
                 $this->props['body'] = $text->render($data);
