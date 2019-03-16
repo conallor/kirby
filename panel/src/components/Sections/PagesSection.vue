@@ -142,6 +142,17 @@ export default {
         page.options = ready => {
           this.$api.pages
             .options(page.id, "list")
+            .then(options => options.map(option => {
+                if (
+                  option.click === 'remove' &&
+                  this.data.length <= this.options.min
+                ) {
+                  option.disabled = true;
+                }
+
+                return option;
+              })
+            )
             .then(options => ready(options))
             .catch(error => {
               this.$store.dispatch("notification/error", error);

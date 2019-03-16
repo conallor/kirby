@@ -110,6 +110,17 @@ export default {
         file.options = ready => {
           this.$api.files
             .options(file.parent, file.filename, "list")
+            .then(options => options.map(option => {
+                if (
+                  option.click === 'remove' &&
+                  this.data.length <= this.options.min
+                ) {
+                  option.disabled = true;
+                }
+
+                return option;
+              })
+            )
             .then(options => ready(options))
             .catch(error => {
               this.$store.dispatch("notification/error", error);
