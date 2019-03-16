@@ -144,7 +144,7 @@ export default {
       const a = this.meridiem || "AM";
 
       const time = this.notation === 24 ? `${h}:${m}:00` : `${h}:${m}:00 ${a}`;
-      const date = dayjs("2000-01-01 " + time);
+      const date = dayjs("2000/01/01 " + time);
 
       this.$emit("input", date.format("HH:mm"));
 
@@ -174,7 +174,7 @@ export default {
     },
     toObject(time) {
 
-      const date = dayjs("2001-01-01 " + time + ":00");
+      const date = dayjs("2001/01/01 " + time + ":00");
 
       if (date.isValid() === false) {
         return {
