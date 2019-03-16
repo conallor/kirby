@@ -35,6 +35,6 @@ class FileTest extends TestCase
         $file = $app->page('test')->file('test.jpg');
 
         $this->assertInstanceOf(File::class, $file);
-        $this->assertEquals(1552725866, $file->modified());
+        $this->assertEquals(1552726245, $file->modified());
     }
 }
